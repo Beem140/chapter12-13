@@ -49,6 +49,8 @@ $order = 1; //ให้เริ่มนับแถวจากเลข 1
           <th>ที่อยู่ปัจจุบัน</th>
           <th>ทักษะความสามารถ</th>
           <th>เบอร์โทรศัพท์</th>
+          <th>แก้ไขข้อมูล</th>
+          <th>ลบข้อมูล</th>
 
         </tr>
       </thead>
@@ -64,6 +66,11 @@ $order = 1; //ให้เริ่มนับแถวจากเลข 1
             <td><?php echo $row["emp_adr"]; ?></td>
             <td><?php echo $row["emp_skill"]; ?></td>
             <td><?php echo $row["emp_tel"]; ?></td>
+            <td><a href="editform.php?emp_id=<?php echo $row
+            ["emp_id"] ?>" class="btn btn-success">แก้ไข</a></td>
+            <td><a href="deletedata.php?emp_id=<?php echo $row
+            ["emp_id"] ?>" class="btn btn-danger"
+            onclick="retern confirm('ยืนยันการลบข้อมูล')">ลบ</a></td>
 
 
           </tr>
