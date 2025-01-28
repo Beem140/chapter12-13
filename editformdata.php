@@ -16,71 +16,110 @@ $row = mysqli_fetch_assoc($result);
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .form-container {
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      max-width: 700px;
+      margin: 50px auto;
+    }
+
+    .form-container h2 {
+      color: #0056b3;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .btn-custom {
+      border-radius: 50px;
+      padding: 10px 20px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border: none;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+  </style>
 
   <title>แก้ไขข้อมูลพนักงาน</title>
 </head>
 
 <body>
-  <div class="container my-3">
-    <h2 class="text-left">แก้ไขข้อมูลพนักงาน</h2>
+  <div class="form-container">
+    <h2>แก้ไขข้อมูลพนักงาน</h2>
     <hr>
     <form action="updatedata.php" method="POST">
-      <input type="hidden" value="<?php echo $row["emp_id"]; ?>" name="emp_id">
-      <div class="form-group col-6">
-        <label for="emp_title">คำนำหน้า :</label>
-        <select name="emp_title" class="form-control" required>
-          <option value="นาย" <?php if ($row["emp_title"] == "นาย") {
-                                echo "SELECTED";
-                              } ?>>นาย</option>
-          <option value="นาง" <?php if ($row["emp_title"] == "นาง") {
-                                echo "SELECTED";
-                              } ?>>นาง</option>
-          <option value="นางสาว" <?php if ($row["emp_title"] == "นางสาว") {
-                                    echo "SELECTED";
-                                  } ?>>นางสาว</option>
+      <input type="hidden" value="<?php echo $row['emp_id']; ?>" name="emp_id">
+      
+      <div class="mb-3">
+        <label for="emp_title" class="form-label">คำนำหน้า</label>
+        <select name="emp_title" class="form-select" required>
+          <option value="นาย" <?php if ($row["emp_title"] == "นาย") echo "selected"; ?>>นาย</option>
+          <option value="นาง" <?php if ($row["emp_title"] == "นาง") echo "selected"; ?>>นาง</option>
+          <option value="นางสาว" <?php if ($row["emp_title"] == "นางสาว") echo "selected"; ?>>นางสาว</option>
         </select>
-        <div>
-          <div class="form-group">
-            <label for="emp_name">ชื่อ :</label>
-            <input type="text" name="emp_name" class="form-control" value="<?php echo $row["emp_name"]; ?>">
-          </div>
-          <div class="form-group">
-            <label for="emp_surname">นามสกุล :</label>
-            <input type="text" name="emp_surname" class="form-control" value="<?php echo $row["emp_surname"]; ?>">
-          </div>
-          <div class="form-group">
-            <label for="emp_birthday">วันเดือนปีเกิด :</label>
-            <input type="date" name="emp_birthday" class="form-control" value="<?php echo $row["emp_birthday"]; ?>">
-          </div>
-          <div class="form-group">
-            <label for="emp_adr">ที่อยู่ปัจจุบัน :</label>
-            <textarea name="emp_adr" class="form-control"><?php echo $row["emp_adr"]; ?></textarea>
-          </div>
-          <div class="form-group">
-            <label for="emp_skill">ทักษะความสามารถ :</label>
-            <textarea name="emp_skill" class="form-control"><?php echo $row["emp_skill"]; ?></textarea>
-          </div>
-          <div class="form-group">
-            <label for="emp_tel">เบอร์โทรศัพท์ :</label>
-            <input type="tel" name="emp_tel" class="form-control" value="<?php echo $row["emp_tel"]; ?>">
-          </div>
-          <div class="my-3">
-            <input type="submit" value="แก้ไขข้อมูล" class="btn btn-success">
-            <input type="reset" value="ล้างข้อมูล" class="btn btn-danger">
-            <a href="index.php" class="btn btn-primary">กลับหน้าแรก</a>
-          </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_name" class="form-label">ชื่อ</label>
+        <input type="text" name="emp_name" class="form-control" value="<?php echo $row['emp_name']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_surname" class="form-label">นามสกุล</label>
+        <input type="text" name="emp_surname" class="form-control" value="<?php echo $row['emp_surname']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_birthday" class="form-label">วันเดือนปีเกิด</label>
+        <input type="date" name="emp_birthday" class="form-control" value="<?php echo $row['emp_birthday']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_adr" class="form-label">ที่อยู่ปัจจุบัน</label>
+        <textarea name="emp_adr" class="form-control" rows="3" required><?php echo $row['emp_adr']; ?></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_skill" class="form-label">ทักษะความสามารถ</label>
+        <textarea name="emp_skill" class="form-control" rows="3" required><?php echo $row['emp_skill']; ?></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="emp_tel" class="form-label">เบอร์โทรศัพท์</label>
+        <input type="tel" name="emp_tel" class="form-control" value="<?php echo $row['emp_tel']; ?>" required>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success btn-custom">บันทึกการแก้ไข</button>
+        <button type="reset" class="btn btn-danger btn-custom">ล้างข้อมูล</button>
+        <a href="index.php" class="btn btn-primary btn-custom">กลับหน้าแรก</a>
+      </div>
     </form>
   </div>
-  <!-- Optional JavaScript; choose one of the two! -->
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
-    -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
